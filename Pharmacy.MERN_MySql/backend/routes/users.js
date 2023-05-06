@@ -39,7 +39,7 @@ router.post('/login',(req,res)=>{
 })
 
 router.post('/',(req,res)=>{
-
+    console.log(req.body)
     let sql = "Select * From users where email=?";
     let values= [
         req.body.email
