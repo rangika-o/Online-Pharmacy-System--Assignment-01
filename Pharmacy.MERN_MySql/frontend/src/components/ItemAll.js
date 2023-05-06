@@ -25,6 +25,19 @@ class ItemAll extends React.Component {
             this.setState({Item:response['data']})
         })
     }
+
+    getImage = async(url) =>{
+        var image=""
+        await axios.get("http://localhost:3500/"+url, {
+            responseType: "text",
+            responseEncoding: "base64",
+          })
+          .then(async(res) => {
+            image = await Buffer.from(res.data, 'base64')
+            console.log(image)
+        })
+        return image
+    }
     
     onDelete(id){
         swal({
@@ -63,7 +76,7 @@ class ItemAll extends React.Component {
             <div class="container">
             <br/><br/>
             <div class="justify-content-center">
-                    <h2>My Item</h2>
+                    <h2>All Items</h2>
                     <hr/>
                     <div class="x_scroll">
                         <div class="form-group row">
@@ -102,7 +115,7 @@ class ItemAll extends React.Component {
                                 <td class="tableTh">{ res.id }</td>
                                 <td class="tableTh">{ res.title }</td>
                                 <td class="tableTh">{ res.description }</td>
-                                <td class="tableTh"><img class="img-thumbnail" width={"100px"} src={ "http://localhost:3500/" + res.image } alt="{ res.date }"/></td>
+                                <td class="tableTh"><img class="img-thumbnail" width={"100px"} src={"http://localhost:3500/"+res.image} alt={ res.title }/></td>
                                 <td class="tableTh">{ res.price }</td>
                                 <td class="tableTh">{ res.quantity }</td>
                                 <td class="tableTh"><a href={"item_edit/" + res.id } class="btn btn-outline-success">Edit</a></td>

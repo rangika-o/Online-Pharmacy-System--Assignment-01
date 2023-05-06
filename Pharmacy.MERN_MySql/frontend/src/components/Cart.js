@@ -123,7 +123,7 @@ class Cart extends React.Component {
                         onRowDelete: (selectedRow) =>
                           new Promise((resolve, reject) => {
                             console.log(selectedRow);
-                            this.onDelete(selectedRow._id);
+                            this.onDelete(selectedRow.id);
                             setTimeout(() => resolve(), 300);
                           }),
                       }}
